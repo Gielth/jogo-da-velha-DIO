@@ -1,0 +1,65 @@
+body {
+    text-align: center;
+    max-width: 393px;
+    margin: auto;
+    background-color: lightseagreen;
+    font-family: 'Cinzel', serif;
+}
+
+h1 {
+    font-family: 'Rubik Puddles', cursive;
+    font-size: 2.5rem;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.box {
+    text-align: center;
+    width: 30px;
+    background-color: darkgray;
+    display: inline-block;
+    padding: 35px;
+    font-size: 35px;
+    margin: 5px;
+    color: darkgray;
+    cursor: pointer;
+    border: 2px solid #000;
+    font-weight: 700;
+    border-radius: .5rem;
+}
+
+.box:hover {
+    box-shadow: red 2px 0, red -2px 0;
+}
+
+.player,
+.winner {
+    text-align: center;
+    font-size: 30px;
+    padding: 0;
+    margin: .25rem 0;
+    border: 1px solid black;
+    border-radius: 1rem;
+    background-color: darkgray;
+}
+
+.player span, .winner span{
+    font-weight: 700;
+}
+
+
+
+button {
+    font-size: 2rem;
+    background-color: darkgreen;
+    border: 2px solid #000;
+    color: darkgray;
+    font-weight: 700;
+    border-radius: 1rem;
+}
+
+button:hover {
+    text-shadow: red -3px 0, blue 3px 0;
+    box-shadow: red -2px 0, blue 2px 0;
+}
