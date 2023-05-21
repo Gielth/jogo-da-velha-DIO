@@ -99,8 +99,6 @@ function checkWinner() {
     }
 }
 
-player = 'X'
-
 function changeValue(element) {
     if (element.innerText !== '-') {
         alert("Escolha outro quadrado!");
