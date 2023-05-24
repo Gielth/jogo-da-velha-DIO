@@ -1,5 +1,6 @@
 let player = 'X';
 let winner = null;
+let initialPlayer = 'X';
 const activePlayer = document.getElementById('player');
 const gameWinner = document.getElementById('winner');
 const resetButton = document.getElementById('resetGame');
@@ -14,6 +15,27 @@ const bottomMiddle = document.getElementById('bottomMiddle');
 const bottomRight = document.getElementById('bottomRight');
 
 activePlayer.innerText = player;
+
+function checkDraw() {
+    if (upperLeft.innerText !== '-' && upperMiddle.innerText !== '-'
+        && upperRight.innerText !== '-' && middleLeft.innerText !== '-'
+        && middleMiddle.innerText !== '-' && middleRight.innerText !== '-'
+        && bottomLeft.innerText !== '-' && bottomMiddle.innerText !== '-'
+        && bottomRight.innerText !== '-') {
+        winner = "None";
+        gameWinner.innerText = "Empate";
+        upperLeft.style.backgroundColor = "#c93636";
+        upperMiddle.style.backgroundColor = "#c93636";
+        upperRight.style.backgroundColor = "#c93636";
+        middleLeft.style.backgroundColor = "#c93636";
+        middleMiddle.style.backgroundColor = "#c93636";
+        middleRight.style.backgroundColor = "#c93636";
+        bottomLeft.style.backgroundColor = "#c93636";
+        bottomMiddle.style.backgroundColor = "#c93636";
+        bottomRight.style.backgroundColor = "#c93636";
+        return;
+    }
+}
 
 function checkSequence(element1, element2, element3) {
     let equalSequence = false;
@@ -97,6 +119,8 @@ function checkWinner() {
         changeBoxColor(bottomLeft)
         changeWinner(upperRight);
     }
+
+    checkDraw();
 }
 
 function changeValue(element) {
@@ -128,6 +152,7 @@ upperLeft.addEventListener('click', () => {
     } else {
         changeValue(upperLeft)
         checkWinner()
+        checkDraw()
     }
 })
 upperMiddle.addEventListener('click', () => {
@@ -194,8 +219,6 @@ bottomRight.addEventListener('click', () => {
         checkWinner()
     }
 })
-
-
 resetButton.addEventListener('click', () => {
     resetGame(upperLeft)
     resetGame(upperMiddle)
@@ -207,7 +230,28 @@ resetButton.addEventListener('click', () => {
     resetGame(bottomMiddle)
     resetGame(bottomRight)
     gameWinner.innerText = ''
-    winner = null;
-    player = 'X'
-    activePlayer.innerText = player;
+    if (winner === 'None') {
+        if (initialPlayer === 'X') {
+            winner = null;
+            player = 'O';
+            activePlayer.innerText = player;
+            initialPlayer = 'O';
+        } else {
+            winner = null;
+            player = 'X';
+            activePlayer.innerText = player;
+            initialPlayer = 'X';
+        }
+    }
+    if (winner === 'X') {
+        winner = null;
+        player = 'O';
+        activePlayer.innerText = player;
+        initialPlayer = 'O';
+    } else {
+        winner = null;
+        player = 'X';
+        activePlayer.innerText = player;
+        initialPlayer = 'X';
+    }
 })
