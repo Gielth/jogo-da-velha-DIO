@@ -9,8 +9,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Rubik+Puddles&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Rubik+Puddles&family=Rubik+Wet+Paint&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
@@ -37,11 +36,17 @@
             <div class="box" id="bottomRight">-</div>
         </div>
     </section>
-    <p class="player">Jogador: <span id="player"></span></p>
-    <p class="winner">Vencedor: <span id="winner"></span></p>
-    <button id="resetGame">Reiniciar</button>
+    <div class="stats">
+        <p class="text">Jogador: <span id="player"></span></p>
+        <p class="text">Vencedor: <span id="winner"></span></p>
+        <p class="text">Rodadas: <span id="rounds">1</span></p>
+        <p class="text">Vitórias X: <span id="winsX">0</span></p>
+        <p class="text">Vitórias O: <span id="winsO">0</span></p>
+        <p class="text">Empates: <span id="draws">0</span></p>
+    </div>
+        <button id="resetGame">Reiniciar</button>
 
+        <script src="./assets/js/main.js"></script>
 </body>
-<script src="./assets/js/main.js"></script>
 
 </html>

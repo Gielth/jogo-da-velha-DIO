@@ -16,35 +16,40 @@ h1 {
 
 .box {
     text-align: center;
-    width: 30px;
+    width: 100px;
     background-color: darkgray;
     display: inline-block;
-    padding: 35px;
-    font-size: 35px;
+    padding: 5px;
+    font-size: 90px;
     margin: 5px;
     color: darkgray;
     cursor: pointer;
     border: 2px solid #000;
-    font-weight: 700;
+    font-weight: 400;
     border-radius: .5rem;
+    font-family: 'Rubik Wet Paint', cursive;
 }
 
 .box:hover {
     box-shadow: red 2px 0, red -2px 0;
 }
 
-.player,
-.winner {
+.stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.stats .text {
     text-align: center;
-    font-size: 30px;
+    font-size: 1rem;
     padding: 0;
-    margin: .25rem 0;
+    margin: 0;
     border: 1px solid black;
     border-radius: 1rem;
     background-color: darkgray;
 }
 
-.player span, .winner span{
+.stats .text span {
     font-weight: 700;
 }
 

@@ -1,6 +1,14 @@
 let player = 'X';
 let winner = null;
 let initialPlayer = 'X';
+let gamesPlayed = 1;
+let gamesWonX = 0;
+let gamesWonO = 0;
+let gamesDrawed = 0;
+const gameWinsX = document.getElementById('winsX');
+const gameWinsO = document.getElementById('winsO');
+const gameDraws = document.getElementById('draws');
+const gameRounds = document.getElementById('rounds');
 const activePlayer = document.getElementById('player');
 const gameWinner = document.getElementById('winner');
 const resetButton = document.getElementById('resetGame');
@@ -15,6 +23,10 @@ const bottomMiddle = document.getElementById('bottomMiddle');
 const bottomRight = document.getElementById('bottomRight');
 
 activePlayer.innerText = player;
+gameWinsX.innerText = gamesWonX
+gameWinsO.innerText = gamesWonO
+gameDraws.innerText = gamesDrawed
+gameRounds.innerText = gamesPlayed
 
 function checkDraw() {
     if (upperLeft.innerText !== '-' && upperMiddle.innerText !== '-'
@@ -38,13 +50,19 @@ function checkDraw() {
 }
 
 function checkSequence(element1, element2, element3) {
-    let equalSequence = false;
-
     if (element1.innerText !== '-' && element1.innerText === element2.innerText && element2.innerText === element3.innerText) {
-        equalSequence = true;
+        return true;
     }
 
-    return equalSequence;
+    if (element2.innerText !== '-' && element1.innerText === element2.innerText && element2.innerText === element3.innerText) {
+        return true;
+    } 
+
+    if (element3.innerText !== '-' && element1.innerText === element2.innerText && element2.innerText === element3.innerText) {
+        return true;
+    }
+
+    return false;
 }
 
 function changeBoxColor(element) {
@@ -57,70 +75,132 @@ function changeWinner(element) {
 }
 
 function checkWinner() {
-    if (checkSequence(upperLeft, upperMiddle, upperRight)) {
-        changeBoxColor(upperLeft)
-        changeBoxColor(upperMiddle)
-        changeBoxColor(upperRight)
+    const line1 = checkSequence(upperLeft, upperMiddle, upperRight)
+    const line2 = checkSequence(middleLeft, middleMiddle, middleRight)
+    const line3 = checkSequence(bottomLeft, bottomMiddle, bottomRight)
+    const vertical1 = checkSequence(upperLeft, middleLeft, bottomLeft)
+    const vertical2 = checkSequence(upperMiddle, middleMiddle, bottomMiddle)
+    const vertical3 = checkSequence(upperRight, middleRight, bottomRight)   
+    const diagonal1 = checkSequence(upperLeft, middleMiddle, bottomRight)
+    const diagonal2 = checkSequence(upperRight, middleMiddle, bottomLeft)
+    
+    if (line1 && vertical1) {
+        changeBoxColor(upperLeft);
+        changeBoxColor(upperMiddle);
+        changeBoxColor(upperRight);
+        changeBoxColor(middleLeft);
+        changeBoxColor(bottomLeft);
         changeWinner(upperLeft);
-        return;
-    }
-
-    if (checkSequence(middleLeft, middleMiddle, middleRight)) {
-        changeBoxColor(middleLeft)
-        changeBoxColor(middleMiddle)
-        changeBoxColor(middleRight)
+    } else if (line1 && vertical2) {
+        changeBoxColor(upperLeft);
+        changeBoxColor(upperMiddle);
+        changeBoxColor(upperRight);
+        changeBoxColor(middleMiddle);
+        changeBoxColor(bottomMiddle);
+        changeWinner(upperMiddle);
+    } else if (line1 && vertical3) {
+        changeBoxColor(upperLeft);
+        changeBoxColor(upperMiddle);
+        changeBoxColor(upperRight);
+        changeBoxColor(middleRight);
+        changeBoxColor(bottomRight);
+        changeWinner(upperRight);
+    } else if (line1) {
+        changeBoxColor(upperLeft);
+        changeBoxColor(upperMiddle);
+        changeBoxColor(upperRight);
+        changeWinner(upperLeft);
+    } else if (line2 && vertical1) {
+        changeBoxColor(middleLeft);
+        changeBoxColor(middleMiddle);
+        changeBoxColor(middleRight);
+        changeBoxColor(upperLeft);
+        changeBoxColor(bottomLeft);
         changeWinner(middleLeft);
-        return;
-    }
-
-    if (checkSequence(bottomLeft, bottomMiddle, bottomRight)) {
-        changeBoxColor(bottomLeft)
-        changeBoxColor(bottomMiddle)
-        changeBoxColor(bottomRight)
+    } else if (line2 && vertical2) {
+        changeBoxColor(middleLeft);
+        changeBoxColor(middleMiddle);
+        changeBoxColor(middleRight);
+        changeBoxColor(upperMiddle);
+        changeBoxColor(bottomMiddle);
+        changeWinner(middleMiddle);
+    } else if (line2 && vertical3) {
+        changeBoxColor(middleLeft);
+        changeBoxColor(middleMiddle);
+        changeBoxColor(middleRight);
+        changeBoxColor(upperRight);
+        changeBoxColor(bottomRight);
+        changeWinner(middleRight);
+    } else if (line2) {
+        changeBoxColor(middleLeft);
+        changeBoxColor(middleMiddle);
+        changeBoxColor(middleRight);
+        changeWinner(middleLeft);
+    } else if (line3 && vertical1) {
+        changeBoxColor(bottomLeft);
+        changeBoxColor(bottomMiddle);
+        changeBoxColor(bottomRight);
+        changeBoxColor(upperLeft);
+        changeBoxColor(middleLeft);
         changeWinner(bottomLeft);
-        return;
-    }
-
-    if (checkSequence(upperLeft, middleLeft, bottomLeft)) {
-        changeBoxColor(upperLeft)
-        changeBoxColor(middleLeft)
-        changeBoxColor(bottomLeft)
+    } else if (line3 && vertical2) {
+        changeBoxColor(bottomLeft);
+        changeBoxColor(bottomMiddle);
+        changeBoxColor(bottomRight);
+        changeBoxColor(upperMiddle);
+        changeBoxColor(middleMiddle);
+        changeWinner(bottomMiddle);
+    } else if (line3 && vertical3) {
+        changeBoxColor(bottomLeft);
+        changeBoxColor(bottomMiddle);
+        changeBoxColor(bottomRight);
+        changeBoxColor(upperRight);
+        changeBoxColor(middleRight);
+        changeWinner(bottomRight);
+    } else if (line3) {
+        changeBoxColor(bottomLeft);
+        changeBoxColor(bottomMiddle);
+        changeBoxColor(bottomRight);
+        changeWinner(bottomLeft);
+    } else if (vertical1) {
+        changeBoxColor(upperLeft);
+        changeBoxColor(middleLeft);
+        changeBoxColor(bottomLeft);
         changeWinner(upperLeft);
         return;
-    }
-
-    if (checkSequence(upperMiddle, middleMiddle, bottomMiddle)) {
-        changeBoxColor(upperMiddle)
-        changeBoxColor(middleMiddle)
-        changeBoxColor(bottomMiddle)
+    } else if (vertical2) {
+        changeBoxColor(upperMiddle);
+        changeBoxColor(middleMiddle);
+        changeBoxColor(bottomMiddle);
         changeWinner(upperMiddle);
         return;
-    }
-
-    if (checkSequence(upperRight, middleRight, bottomRight)) {
-        changeBoxColor(upperRight)
-        changeBoxColor(middleRight)
-        changeBoxColor(bottomRight)
+    } else if (vertical3) {
+        changeBoxColor(upperRight);
+        changeBoxColor(middleRight);
+        changeBoxColor(bottomRight);
         changeWinner(upperRight);
         return;
-    }
-
-    if (checkSequence(upperLeft, middleMiddle, bottomRight)) {
-        changeBoxColor(upperLeft)
-        changeBoxColor(middleMiddle)
-        changeBoxColor(bottomRight)
+    } else if (diagonal1 && diagonal2) {
+        changeBoxColor(upperLeft);
+        changeBoxColor(middleMiddle);
+        changeBoxColor(bottomRight);
+        changeBoxColor(upperRight);
+        changeBoxColor(bottomLeft);
+        changeWinner(middleMiddle);
+    } else if (diagonal1) {
+        changeBoxColor(upperLeft);
+        changeBoxColor(middleMiddle);
+        changeBoxColor(bottomRight);
         changeWinner(upperLeft);
         return;
-    }
-
-    if (checkSequence(upperRight, middleMiddle, bottomLeft)) {
-        changeBoxColor(upperRight)
-        changeBoxColor(middleMiddle)
-        changeBoxColor(bottomLeft)
+    } else if (diagonal2) {
+        changeBoxColor(upperRight);
+        changeBoxColor(middleMiddle);
+        changeBoxColor(bottomLeft);
         changeWinner(upperRight);
+    } else if (!line1 && !line2 && !line3 && !vertical1 && !vertical2 && !vertical3 && !diagonal1 && !diagonal2) {
+        checkDraw();
     }
-
-    checkDraw();
 }
 
 function changeValue(element) {
@@ -233,25 +313,60 @@ resetButton.addEventListener('click', () => {
     if (winner === 'None') {
         if (initialPlayer === 'X') {
             winner = null;
+            gamesPlayed++;
+            gamesDrawed++;
             player = 'O';
             activePlayer.innerText = player;
+            gameWinsX.innerText = gamesWonX
+            gameWinsO.innerText = gamesWonO
+            gameDraws.innerText = gamesDrawed
+            gameRounds.innerText = gamesPlayed
             initialPlayer = 'O';
+            console.log(gamesPlayed, gamesDrawed)
         } else {
             winner = null;
+            gamesPlayed++;
+            gamesDrawed++;
             player = 'X';
             activePlayer.innerText = player;
+            gameWinsX.innerText = gamesWonX
+            gameWinsO.innerText = gamesWonO
+            gameDraws.innerText = gamesDrawed
+            gameRounds.innerText = gamesPlayed
             initialPlayer = 'X';
+            console.log(gamesPlayed, gamesDrawed)
         }
     }
     if (winner === 'X') {
         winner = null;
+        gamesPlayed++;
+        gamesWonX++;
         player = 'O';
         activePlayer.innerText = player;
+        gameWinsX.innerText = gamesWonX
+        gameWinsO.innerText = gamesWonO
+        gameDraws.innerText = gamesDrawed
+        gameRounds.innerText = gamesPlayed
         initialPlayer = 'O';
+    } else if (winner === 'O') {
+        winner = null;
+        gamesPlayed++;
+        gamesWonO++;
+        player = 'X';
+        activePlayer.innerText = player;
+        gameWinsX.innerText = gamesWonX
+        gameWinsO.innerText = gamesWonO
+        gameDraws.innerText = gamesDrawed
+        gameRounds.innerText = gamesPlayed
+        initialPlayer = 'X';
     } else {
         winner = null;
         player = 'X';
         activePlayer.innerText = player;
+        gameWinsX.innerText = gamesWonX
+        gameWinsO.innerText = gamesWonO
+        gameDraws.innerText = gamesDrawed
+        gameRounds.innerText = gamesPlayed
         initialPlayer = 'X';
     }
 })
