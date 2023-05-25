@@ -56,7 +56,7 @@ function checkSequence(element1, element2, element3) {
 
     if (element2.innerText !== '-' && element1.innerText === element2.innerText && element2.innerText === element3.innerText) {
         return true;
-    } 
+    }
 
     if (element3.innerText !== '-' && element1.innerText === element2.innerText && element2.innerText === element3.innerText) {
         return true;
@@ -80,10 +80,10 @@ function checkWinner() {
     const line3 = checkSequence(bottomLeft, bottomMiddle, bottomRight)
     const vertical1 = checkSequence(upperLeft, middleLeft, bottomLeft)
     const vertical2 = checkSequence(upperMiddle, middleMiddle, bottomMiddle)
-    const vertical3 = checkSequence(upperRight, middleRight, bottomRight)   
+    const vertical3 = checkSequence(upperRight, middleRight, bottomRight)
     const diagonal1 = checkSequence(upperLeft, middleMiddle, bottomRight)
     const diagonal2 = checkSequence(upperRight, middleMiddle, bottomLeft)
-    
+
     if (line1 && vertical1) {
         changeBoxColor(upperLeft);
         changeBoxColor(upperMiddle);
@@ -91,6 +91,7 @@ function checkWinner() {
         changeBoxColor(middleLeft);
         changeBoxColor(bottomLeft);
         changeWinner(upperLeft);
+        return;
     } else if (line1 && vertical2) {
         changeBoxColor(upperLeft);
         changeBoxColor(upperMiddle);
@@ -98,6 +99,7 @@ function checkWinner() {
         changeBoxColor(middleMiddle);
         changeBoxColor(bottomMiddle);
         changeWinner(upperMiddle);
+        return;
     } else if (line1 && vertical3) {
         changeBoxColor(upperLeft);
         changeBoxColor(upperMiddle);
@@ -105,11 +107,29 @@ function checkWinner() {
         changeBoxColor(middleRight);
         changeBoxColor(bottomRight);
         changeWinner(upperRight);
+        return;
+    } else if (line1 && diagonal1) {
+        changeBoxColor(upperLeft);
+        changeBoxColor(upperMiddle);
+        changeBoxColor(upperRight);
+        changeBoxColor(middleMiddle);
+        changeBoxColor(bottomRight);
+        changeWinner(upperLeft);
+        return;
+    } else if (line1 && diagonal2) {
+        changeBoxColor(upperLeft);
+        changeBoxColor(upperMiddle);
+        changeBoxColor(upperRight);
+        changeBoxColor(middleMiddle);
+        changeBoxColor(bottomLeft);
+        changeWinner(upperRight);
+        return;
     } else if (line1) {
         changeBoxColor(upperLeft);
         changeBoxColor(upperMiddle);
         changeBoxColor(upperRight);
         changeWinner(upperLeft);
+        return;
     } else if (line2 && vertical1) {
         changeBoxColor(middleLeft);
         changeBoxColor(middleMiddle);
@@ -117,6 +137,7 @@ function checkWinner() {
         changeBoxColor(upperLeft);
         changeBoxColor(bottomLeft);
         changeWinner(middleLeft);
+        return;
     } else if (line2 && vertical2) {
         changeBoxColor(middleLeft);
         changeBoxColor(middleMiddle);
@@ -124,6 +145,7 @@ function checkWinner() {
         changeBoxColor(upperMiddle);
         changeBoxColor(bottomMiddle);
         changeWinner(middleMiddle);
+        return;
     } else if (line2 && vertical3) {
         changeBoxColor(middleLeft);
         changeBoxColor(middleMiddle);
@@ -131,11 +153,13 @@ function checkWinner() {
         changeBoxColor(upperRight);
         changeBoxColor(bottomRight);
         changeWinner(middleRight);
+        return;
     } else if (line2) {
         changeBoxColor(middleLeft);
         changeBoxColor(middleMiddle);
         changeBoxColor(middleRight);
         changeWinner(middleLeft);
+        return;
     } else if (line3 && vertical1) {
         changeBoxColor(bottomLeft);
         changeBoxColor(bottomMiddle);
@@ -143,6 +167,7 @@ function checkWinner() {
         changeBoxColor(upperLeft);
         changeBoxColor(middleLeft);
         changeWinner(bottomLeft);
+        return;
     } else if (line3 && vertical2) {
         changeBoxColor(bottomLeft);
         changeBoxColor(bottomMiddle);
@@ -150,6 +175,7 @@ function checkWinner() {
         changeBoxColor(upperMiddle);
         changeBoxColor(middleMiddle);
         changeWinner(bottomMiddle);
+        return;
     } else if (line3 && vertical3) {
         changeBoxColor(bottomLeft);
         changeBoxColor(bottomMiddle);
@@ -157,23 +183,68 @@ function checkWinner() {
         changeBoxColor(upperRight);
         changeBoxColor(middleRight);
         changeWinner(bottomRight);
+        return;
+    } else if (line3 && diagonal1) {
+        changeBoxColor(bottomLeft);
+        changeBoxColor(bottomMiddle);
+        changeBoxColor(bottomRight);
+        changeBoxColor(middleMiddle);
+        changeBoxColor(upperLeft);
+        changeWinner(bottomLeft);
+        return;
+    } else if (line3 && diagonal2) {
+        changeBoxColor(bottomLeft);
+        changeBoxColor(bottomMiddle);
+        changeBoxColor(bottomRight);
+        changeBoxColor(middleMiddle);
+        changeBoxColor(upperRight);
+        changeWinner(bottomRight);
+        return;
     } else if (line3) {
         changeBoxColor(bottomLeft);
         changeBoxColor(bottomMiddle);
         changeBoxColor(bottomRight);
+        changeWinner(bottomLeft);
+        return;
+    } else if (vertical1 && diagonal1) {
+        changeBoxColor(upperLeft);
+        changeBoxColor(middleLeft);
+        changeBoxColor(bottomLeft);
+        changeBoxColor(middleMiddle);
+        changeBoxColor(bottomRight);
+        changeWinner(upperLeft);
+        return;
+    } else if (vertical1 && diagonal2) {
+        changeBoxColor(upperLeft);
+        changeBoxColor(middleLeft);
+        changeBoxColor(bottomLeft);
+        changeBoxColor(middleMiddle);
+        changeBoxColor(upperRight);
         changeWinner(bottomLeft);
     } else if (vertical1) {
         changeBoxColor(upperLeft);
         changeBoxColor(middleLeft);
         changeBoxColor(bottomLeft);
         changeWinner(upperLeft);
-        return;
     } else if (vertical2) {
         changeBoxColor(upperMiddle);
         changeBoxColor(middleMiddle);
         changeBoxColor(bottomMiddle);
         changeWinner(upperMiddle);
-        return;
+    } else if (vertical3 && diagonal1) {
+        changeBoxColor(upperRight);
+        changeBoxColor(middleRight);
+        changeBoxColor(bottomRight);
+        changeBoxColor(middleMiddle);
+        changeBoxColor(upperLeft);
+        changeWinner(bottomRight);
+    } else if (vertical3 && diagonal2) {
+        changeBoxColor(upperRight);
+        changeBoxColor(middleRight);
+        changeBoxColor(bottomRight);
+        changeBoxColor(middleMiddle);
+        changeBoxColor(bottomLeft);
+        changeWinner(upperRight);
     } else if (vertical3) {
         changeBoxColor(upperRight);
         changeBoxColor(middleRight);
@@ -187,6 +258,7 @@ function checkWinner() {
         changeBoxColor(upperRight);
         changeBoxColor(bottomLeft);
         changeWinner(middleMiddle);
+        return;
     } else if (diagonal1) {
         changeBoxColor(upperLeft);
         changeBoxColor(middleMiddle);
@@ -198,7 +270,11 @@ function checkWinner() {
         changeBoxColor(middleMiddle);
         changeBoxColor(bottomLeft);
         changeWinner(upperRight);
-    } else if (!line1 && !line2 && !line3 && !vertical1 && !vertical2 && !vertical3 && !diagonal1 && !diagonal2) {
+        return;
+    } else if (line1 === false && line2 === false
+        && line3 === false && vertical1 === false
+        && vertical2 === false && vertical3 === false
+        && diagonal1 === false && diagonal2  === false) {
         checkDraw();
     }
 }
@@ -232,7 +308,6 @@ upperLeft.addEventListener('click', () => {
     } else {
         changeValue(upperLeft)
         checkWinner()
-        checkDraw()
     }
 })
 upperMiddle.addEventListener('click', () => {
@@ -322,7 +397,6 @@ resetButton.addEventListener('click', () => {
             gameDraws.innerText = gamesDrawed
             gameRounds.innerText = gamesPlayed
             initialPlayer = 'O';
-            console.log(gamesPlayed, gamesDrawed)
         } else {
             winner = null;
             gamesPlayed++;
@@ -334,7 +408,6 @@ resetButton.addEventListener('click', () => {
             gameDraws.innerText = gamesDrawed
             gameRounds.innerText = gamesPlayed
             initialPlayer = 'X';
-            console.log(gamesPlayed, gamesDrawed)
         }
     }
     if (winner === 'X') {
